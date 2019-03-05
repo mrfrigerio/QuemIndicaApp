@@ -9,7 +9,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import br.com.ragnelli.app.model.Morador;
-import br.com.ragnelli.app.model.Morador_;
 
 @Stateless
 public class LoginBean {
@@ -42,7 +41,7 @@ public class LoginBean {
 			CriteriaQuery<Morador> cq = cb.createQuery(Morador.class);
 			Root<Morador> morador = cq.from(Morador.class);
 			cq.select(morador);
-			cq.where(cb.equal(morador.get(Morador_.email), email));
+//			cq.where(cb.equal(morador.get(Morador_.email), email));
 
 			TypedQuery<Morador> q = em.createQuery(cq);
 

@@ -20,7 +20,7 @@ import javax.persistence.OneToMany;
 public class Condominio implements Serializable {
 
 	public enum TipoCondominio {
-		Prédios, Casas;
+		Predios, Casas;
 	}
 
 	@Id
