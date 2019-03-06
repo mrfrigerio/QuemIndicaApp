@@ -3,6 +3,7 @@
 	<persistence-unit name="quemIndicaPU">
 		<jta-data-source>jdbc/QuemIndicaDS</jta-data-source>
 		<class>br.com.ragnelli.app.model.Avaliacao</class>
+		<class>br.com.ragnelli.app.model.Bloco</class>
 		<class>br.com.ragnelli.app.model.Condominio</class>
 		<class>br.com.ragnelli.app.model.Endereco</class>
 		<class>br.com.ragnelli.app.model.Morador</class>
@@ -14,6 +15,7 @@
 			<property name="hibernate.format_sql" value="false"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="javax.persistence.schema-generation.create-database-schemas" value="false"/>
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>
 	</persistence-unit>
 </persistence>
