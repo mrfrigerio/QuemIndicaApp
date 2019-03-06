@@ -14,6 +14,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="C:/Users/Marcelo.Ragnelli/Programas/wildfly-15.0.1.Final/modules/system/layers/base/javax/json/bind/api/main/javax.json.bind-api-1.0.jar"/>
+	<classpathentry kind="lib" path="src/br/com/ragnelli/app/resources/javax.json.bind-api-1.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
