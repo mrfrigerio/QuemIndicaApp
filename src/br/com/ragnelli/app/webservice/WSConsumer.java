@@ -7,10 +7,9 @@ import javax.ws.rs.core.MediaType;
 import br.com.ragnelli.app.model.Endereco;
 
 public class WSConsumer {
-	
-	private Client client = ClientBuilder.newClient();
-	
-	public Endereco buscaCep(String cep) {
+
+	public static Endereco buscaEnderecoByCep(String cep) {
+		Client client = ClientBuilder.newClient();
 		Endereco endereco = client.target("http://viacep.com.br/ws/")
 								  .path(cep + "/json")
 								  .request(MediaType.APPLICATION_JSON)

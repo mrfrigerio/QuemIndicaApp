@@ -121,7 +121,7 @@ public class CadastroCondominioBean implements Serializable {
 			cadastro.buscarCondominio(condominio);
 			adicionarBloco(null);
 			cadastro.gravar(condominio, blocosBean);
-			context.addMessage(null, new FacesMessage("CondomÌnio Cadastrado com Sucesso!!!"));
+			context.addMessage(null, new FacesMessage("Condom√≠nio Cadastrado com Sucesso!!!"));
 			conversation.end();
 			return "cadastrarCondominio?faces-redirect=true";
 
@@ -148,7 +148,7 @@ public class CadastroCondominioBean implements Serializable {
 			condominio.getEndereco().setEstado(end.getEstado());
 
 		} catch (Exception e) {
-			System.out.println("CEP n„o localizado!");
+			System.out.println("CEP n√£o localizado!");
 		}
 
 		return null;

@@ -19,30 +19,34 @@ public class Bloco implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	
+
 	@Column(nullable = false, length = 60)
 	private String nome;
-	
+
 	@ElementCollection
 	@CollectionTable(name = "unidades", joinColumns = @JoinColumn(name = "bloco_id"))
 	@Column(name = "unidade")
 	private List<Integer> unidades;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "condominio_id")
 	private Condominio condominio;
-	
+
 	public Bloco() {
-		
+
 	}
-	
+
 	public Bloco(String nome, List<Integer> unidades) {
 		this.nome = nome;
 		this.unidades = unidades;
 	}
-	
+
 	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -62,10 +66,6 @@ public class Bloco implements Serializable {
 
 	public void setUnidades(List<Integer> unidades) {
 		this.unidades = unidades;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public Condominio getCondominio() {
@@ -106,7 +106,5 @@ public class Bloco implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }

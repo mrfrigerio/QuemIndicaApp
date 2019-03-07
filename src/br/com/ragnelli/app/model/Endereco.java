@@ -24,6 +24,9 @@ public class Endereco implements Serializable {
 	@Column(length = 60)
 	private String bairro;
 	
+	@Column(length = 150)
+	private String pontoDeReferencia;
+	
 	@JsonbProperty("uf")
 	@Column(nullable = false, length = 2)
 	private String estado;
@@ -76,8 +79,13 @@ public class Endereco implements Serializable {
 		this.estado = estado;
 	}
 
-	
-	
+	public String getPontoDeReferencia() {
+		return pontoDeReferencia;
+	}
+
+	public void setPontoDeReferencia(String pontoDeReferencia) {
+		this.pontoDeReferencia = pontoDeReferencia;
+	}
 
 	@Override
 	public int hashCode() {

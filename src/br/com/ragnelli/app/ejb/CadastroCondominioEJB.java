@@ -15,13 +15,11 @@ import br.com.ragnelli.app.webservice.WSConsumer;
 @Stateless
 public class CadastroCondominioEJB {
 
-	WSConsumer wsConsumer = new WSConsumer();
-	
 	@PersistenceContext
 	private EntityManager em;
 	
 	public Endereco buscarCep(String cep) {
-		Endereco endereco = wsConsumer.buscaCep(cep);
+		Endereco endereco = WSConsumer.buscaEnderecoByCep(cep);
 		return endereco;
 	}
 	
@@ -30,7 +28,7 @@ public class CadastroCondominioEJB {
 		List<Condominio> condominios = em.createQuery("SELECT c FROM Condominio c ORDER BY c.nome", Condominio.class).getResultList();
 		
 		if(condominios.contains(condominio)) {
-			throw new CadastroException("Já existe um condomínio cadastrado com este endereço!");
+			throw new CadastroException("JÃ¡ existe um condomÃ­nio cadastrado com este endereÃ§o!");
 		}
 	}
 	

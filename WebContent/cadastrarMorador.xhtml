@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Quem Indica - Indicação de Prestadores de Serviços em Condomínios</title>
+	<title>Quem Indica Indicações</title>
 </h:head>
 
 <h:body>
@@ -26,7 +25,7 @@
 
 			<h:outputText value="Telefone fixo:" />
 			<h:panelGroup>
-				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="1" maxlength="2" />
+				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="2" maxlength="2" />
 				<h:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}">
 					<f:validator validatorId="telefoneValidator" />
 				</h:inputText>
@@ -34,7 +33,7 @@
 
 			<h:outputText value="Telefone celular:" />
 			<h:panelGroup>
-				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="1" maxlength="2" />
+				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="2" maxlength="2" />
 				<h:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}">
 					<f:validator validatorId="telefoneValidator" />
 				</h:inputText>
@@ -42,7 +41,7 @@
 
 			<h:outputText value="Condomínio:" />
 			<h:panelGroup>
-				<h:selectOneMenu id="condominio" value="#{formMoradorBean.morador.condominio.id}" valueChangeListener="#{formMoradorBean.carregarBlocos}">
+				<h:selectOneMenu id="condominio" value="#{formMoradorBean.morador.condominio.id}" required="true" valueChangeListener="#{formMoradorBean.carregarBlocos}">
 					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 					<f:selectItems value="#{formMoradorBean.condominios}" var="c" itemLabel="#{c.nome} - #{c.endereco.estado}" itemValue="#{c.id}" />
 					<f:ajax event="change" execute="@this" render="form:bloco" />
@@ -54,22 +53,21 @@
 			<h:selectOneMenu id="bloco" value="#{formMoradorBean.morador.bloco.id}" required="true">
 				<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
 				<f:selectItems value="#{formMoradorBean.morador.condominio.blocos}" var="b" itemLabel="#{b.nome}" itemValue="#{b.id}" />
-				<f:ajax event="change" execute="@this" render="@none" />
 			</h:selectOneMenu>
-			
+
 			<h:outputText value="Unidade:" />
 			<h:inputText value="#{formMoradorBean.morador.unidade}" required="true" />
-			
+
 			<h:outputText value="Senha:" />
 			<h:inputSecret value="#{formMoradorBean.morador.senha}" required="true" />
-			
+
 			<h:outputText value="Confirmação de Senha:" />
 			<h:inputSecret value="#{formMoradorBean.passwordCheck}" required="true" />
 
 		</h:panelGrid>
 
 		<hr />
-		<h:commandButton value="Gravar">
+		<h:commandButton value="Gravar" action="#{formMoradorBean.gravar}">
 			<f:ajax event="action" execute="@form" render="@form" />
 		</h:commandButton>
 

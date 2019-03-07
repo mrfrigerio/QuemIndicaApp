@@ -14,7 +14,9 @@ public class Prestador extends Pessoa implements Serializable {
 	@Embedded
 	private Endereco endereco;
 
-	private String Ramo;
+	private String ramo;
+	
+	private String website;
 
 	@OneToMany(mappedBy = "prestador")
 	private Set<Avaliacao> avaliacoes;
@@ -31,11 +33,19 @@ public class Prestador extends Pessoa implements Serializable {
 	}
 
 	public String getRamo() {
-		return Ramo;
+		return ramo;
 	}
 
 	public void setRamo(String ramo) {
-		Ramo = ramo;
+		this.ramo = ramo;
+	}
+	
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String site) {
+		this.website = site;
 	}
 
 	public Set<Avaliacao> getAvaliacoes() {

@@ -5,7 +5,7 @@
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-	<title>Quem Indica - Indicação de Prestadores de Serviços em Condomínios</title>
+	<title>Quem Indica Indicações</title>
 </h:head>
 
 <h:body>
@@ -46,6 +46,9 @@
 
 			<h:outputText value="Estado:" />
 			<h:inputText id="estado" value="#{formCondominioBean.condominio.endereco.estado}" required="true" />
+
+			<h:outputText value="Ponto de Referência:" />
+			<h:inputText id="pontoDeReferencia" value="#{formCondominioBean.condominio.endereco.pontoDeReferencia}" />
 
 			<h:outputText value="Telefone fixo:" />
 			<h:panelGroup>
