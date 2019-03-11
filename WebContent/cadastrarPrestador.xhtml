@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	  xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -11,12 +15,13 @@
 
 	<h:form id="form">
 
-		<h2>Cadastro de Prestadores de Servico</h2>
 		<h:inputHidden value="#{formPrestadorBean.prestador.id}" />
 
 		<h:messages />
 		<h:panelGrid columns="2">
-
+			
+			<f:facet name="header">Cadastro de Prestadores de Serviço</f:facet>
+			
 			<h:outputText value="Nome da empresa:" />
 			<h:inputText value="#{formPrestadorBean.prestador.nome}" required="true" />
 
@@ -69,13 +74,18 @@
 			<h:outputText value="website:" />
 			<h:inputText value="#{formPrestadorBean.prestador.website}" required="true" />
 			
+			<f:facet name="footer">
 
+				<h:commandButton value="Gravar" action="#{formPrestadorBean.gravar}">
+					<f:ajax event="action" execute="@form" render="@form" />
+				</h:commandButton>
+
+
+			</f:facet>
+			
 		</h:panelGrid>
 
 		<hr />
-		<h:commandButton value="Gravar" action="#{formPrestadorBean.gravar}">
-			<f:ajax event="action" execute="@form" render="@form" />
-		</h:commandButton>
 
 	</h:form>
 </h:body>

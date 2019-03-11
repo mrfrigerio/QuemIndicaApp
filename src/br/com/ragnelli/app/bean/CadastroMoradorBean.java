@@ -5,18 +5,19 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
-import javax.faces.event.ValueChangeEvent;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import br.com.ragnelli.app.ejb.CadastroMoradorEJB;
+import br.com.ragnelli.app.model.Bloco;
 import br.com.ragnelli.app.model.Condominio;
 import br.com.ragnelli.app.model.Morador;
 
-@SessionScoped
+@ViewScoped
 @Named("formMoradorBean")
 public class CadastroMoradorBean implements Serializable {
 
@@ -63,10 +64,19 @@ public class CadastroMoradorBean implements Serializable {
 		return cadastro.buscarCondominios();
 	}
 
-	public void carregarBlocos(ValueChangeEvent event) {
-		Condominio condominio = cadastro.buscarCondominioById((Integer) event.getNewValue());
+	public void carregarBlocos(AjaxBehaviorEvent event) {
+		Condominio condominio = (Condominio) event.getSource();
 		morador.setCondominio(condominio);
 	}
+	
+	public List<Condominio> condominioAutocomplete(String nomeCondominio) {
+		List<Condominio> listaDeCondominios = cadastro.buscarCondominioByName(nomeCondominio);
+		return listaDeCondominios;
+	} 
+	
+	public List<Bloco> blocoAutocomplete(String nomeBloco) {
+		return morador.getCondominio().getBlocos();
+	} 
 	
 	public String gravar() {
 		
@@ -76,7 +86,5 @@ public class CadastroMoradorBean implements Serializable {
 		
 		return "cadastrarMorador?faces-redirect=true";
 	}
-	
-	//TODO: Criar método para validar a confirmação de senha
 	
 }

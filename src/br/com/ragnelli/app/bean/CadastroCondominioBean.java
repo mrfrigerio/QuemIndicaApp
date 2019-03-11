@@ -104,7 +104,7 @@ public class CadastroCondominioBean implements Serializable {
 		this.blocosModelBean = blocosModelBean;
 	}
 
-	public String adicionarBloco(AjaxBehaviorEvent event) {
+	public String adicionarBloco() {
 		if (!nomeBlocoBean.isBlank()) {
 			Bloco bloco = new Bloco(nomeBlocoBean, unidadesBlocoBean);
 			blocosBean.add(bloco);
@@ -119,7 +119,7 @@ public class CadastroCondominioBean implements Serializable {
 
 		try {
 			cadastro.buscarCondominio(condominio);
-			adicionarBloco(null);
+			adicionarBloco();
 			cadastro.gravar(condominio, blocosBean);
 			context.addMessage(null, new FacesMessage("Condomínio Cadastrado com Sucesso!!!"));
 			conversation.end();

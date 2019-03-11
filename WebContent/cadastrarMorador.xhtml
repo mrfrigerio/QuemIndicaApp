@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	  xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
@@ -11,65 +14,69 @@
 
 	<h:form id="form">
 
-		<h2>Cadastro de Moradores</h2>
 		<h:inputHidden value="#{formMoradorBean.morador.id}" />
 
-		<h:messages />
-		<h:panelGrid columns="2">
+		<p:messages />
+		<p:panelGrid columns="2">
 
-			<h:outputText value="Nome:" />
-			<h:inputText value="#{formMoradorBean.morador.nome}" required="true" />
+			<f:facet name="header">Cadastro de Moradores</f:facet>
 
-			<h:outputText value="e-mail:" />
-			<h:inputText value="#{formMoradorBean.morador.email}" pt:type="email" required="true" />
+			<p:outputLabel for="nome" value="Nome:" />
+			<p:inputText id="nome" value="#{formMoradorBean.morador.nome}" size="50" required="true" />
 
-			<h:outputText value="Telefone fixo:" />
+			<p:outputLabel for="email" value="e-mail:" />
+			<p:inputText id="email" value="#{formMoradorBean.morador.email}" size="50" type="email" required="true" />
+
+			<p:outputLabel value="Telefone fixo:" />
 			<h:panelGroup>
-				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="2" maxlength="2" />
-				<h:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}">
+				<p:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="2" maxlength="2" />
+				<p:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}">
 					<f:validator validatorId="telefoneValidator" />
-				</h:inputText>
+				</p:inputText>
 			</h:panelGroup>
 
-			<h:outputText value="Telefone celular:" />
+			<p:outputLabel value="Telefone celular:" />
 			<h:panelGroup>
-				<h:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="2" maxlength="2" />
-				<h:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}">
+				<p:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="2" maxlength="2" />
+				<p:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}">
 					<f:validator validatorId="telefoneValidator" />
-				</h:inputText>
+				</p:inputText>
 			</h:panelGroup>
 
-			<h:outputText value="Condomínio:" />
-			<h:panelGroup>
-				<h:selectOneMenu id="condominio" value="#{formMoradorBean.morador.condominio.id}" required="true" valueChangeListener="#{formMoradorBean.carregarBlocos}">
-					<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-					<f:selectItems value="#{formMoradorBean.condominios}" var="c" itemLabel="#{c.nome} - #{c.endereco.estado}" itemValue="#{c.id}" />
-					<f:ajax event="change" execute="@this" render="form:bloco" />
-				</h:selectOneMenu>
-				<h:message for="condominio" />
-			</h:panelGroup>
+			<p:outputLabel for="frmCondominio" value="Condomínio:" />
+			<p:autoComplete id="frmCondominio" value="#{formMoradorBean.morador.condominio}" required="true" dropdown="true" forceSelection="true"
+							completeMethod="#{formMoradorBean.condominioAutocomplete}" 
+							var="c"
+							itemLabel="#{c.nome}"
+							itemValue="#{c}"
+							converter="condominioConverter">
+				<p:ajax process="@this" update="form:frmBloco" event="itemSelect" partialSubmit="true"/>
+			</p:autoComplete>
+			
+			<p:outputLabel for="frmBloco" value="Bloco:" />				
+			<p:autoComplete id="frmBloco" value="#{formMoradorBean.morador.bloco}" required="true" dropdown="true" forceSelection="true"
+							completeMethod="#{formMoradorBean.blocoAutocomplete}" 
+							var="b"
+							itemLabel="#{b.nome}"
+							itemValue="#{b}"
+							/>
 
-			<h:outputText value="Bloco:" />
-			<h:selectOneMenu id="bloco" value="#{formMoradorBean.morador.bloco.id}" required="true">
-				<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-				<f:selectItems value="#{formMoradorBean.morador.condominio.blocos}" var="b" itemLabel="#{b.nome}" itemValue="#{b.id}" />
-			</h:selectOneMenu>
+			<p:outputLabel value="Unidade:" />
+			<p:inputText value="#{formMoradorBean.morador.unidade}" required="true" />
 
-			<h:outputText value="Unidade:" />
-			<h:inputText value="#{formMoradorBean.morador.unidade}" required="true" />
+			<p:outputLabel for="pwd1" value="Senha:" />
+			<p:password id="pwd1" value="#{formMoradorBean.morador.senha}" match="pwd2" required="true" feedback="true" 
+						validatorMessage="As senhas não conferem!" 
+						promptLabel="Digite uma senha."/>
 
-			<h:outputText value="Senha:" />
-			<h:inputSecret value="#{formMoradorBean.morador.senha}" required="true" />
+			<p:outputLabel for="pwd2" value="Confirmação de Senha:" />
+			<p:password id="pwd2" value="#{formMoradorBean.passwordCheck}" required="true" feedback="true" promptLabel="Confirme a senha digitada." />
 
-			<h:outputText value="Confirmação de Senha:" />
-			<h:inputSecret value="#{formMoradorBean.passwordCheck}" required="true" />
+			<f:facet name="footer">
+				<p:commandButton value="Gravar" action="#{formMoradorBean.gravar}" process="@form" update="@form" />
+			</f:facet>
+		</p:panelGrid>
 
-		</h:panelGrid>
-
-		<hr />
-		<h:commandButton value="Gravar" action="#{formMoradorBean.gravar}">
-			<f:ajax event="action" execute="@form" render="@form" />
-		</h:commandButton>
 
 	</h:form>
 </h:body>

@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.ragnelli.app.util.StringUtils;
+import br.com.ragnelli.app.utils.StringUtils;
 
 @FacesConverter("unidadesConverter")
 public class UnidadesConverter implements Converter<List<Integer>> {
