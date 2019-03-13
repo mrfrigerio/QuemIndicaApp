@@ -28,18 +28,18 @@
 
 			<p:outputLabel value="Telefone fixo:" />
 			<h:panelGroup>
-				<p:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="2" maxlength="2" />
-				<p:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}">
+				<p:inputMask value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)"/>
+				<p:inputMask value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999" >
 					<f:validator validatorId="telefoneValidator" />
-				</p:inputText>
+				</p:inputMask>
 			</h:panelGroup>
 
 			<p:outputLabel value="Telefone celular:" />
 			<h:panelGroup>
-				<p:inputText value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="2" maxlength="2" />
-				<p:inputText value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}">
+				<p:inputMask value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
+				<p:inputMask value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
 					<f:validator validatorId="telefoneValidator" />
-				</p:inputText>
+				</p:inputMask>
 			</h:panelGroup>
 
 			<p:outputLabel for="frmCondominio" value="Condomínio:" />

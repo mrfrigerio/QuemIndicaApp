@@ -8,13 +8,13 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Telefone implements Serializable {
 
-	@Column(length = 2)
+	@Column(length = 4)
 	private String dddTelefoneFixo;
 	
 	@Column(length = 9)
 	private String numeroTelefoneFixo;
 	
-	@Column(length = 2)
+	@Column(length = 4)
 	private String dddTelefoneCelular;
 	
 	@Column(length = 10)

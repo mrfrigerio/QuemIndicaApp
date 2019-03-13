@@ -14,7 +14,6 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.print.attribute.standard.Severity;
 
 import br.com.ragnelli.app.ejb.CadastroCondominioEJB;
 import br.com.ragnelli.app.exception.CadastroException;

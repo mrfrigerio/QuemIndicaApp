@@ -20,7 +20,7 @@ public class TelefoneValidator implements Validator<String> {
 		Matcher matcher = pattern.matcher(value);
 		
 		if (!value.isBlank() && !matcher.matches()) {
-			throw new ValidatorException(new FacesMessage("O telefone digitado È inv·lido!"));
+			throw new ValidatorException(new FacesMessage("O telefone digitado √© inv√°lido!"));
 		}
 	}
 	

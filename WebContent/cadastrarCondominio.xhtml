@@ -3,7 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" 
 	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
 	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
-	  xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	  xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -54,18 +53,18 @@
 
 			<p:outputLabel value="Telefone fixo:" />
 			<p:panel>
-				<p:inputText value="#{formCondominioBean.condominio.telefone.dddTelefoneFixo}" size="1" maxlength="2" />
-				<p:inputText value="#{formCondominioBean.condominio.telefone.numeroTelefoneFixo}">
+				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)" />
+				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999">
 					<f:validator validatorId="telefoneValidator" />
-				</p:inputText>
+				</p:inputMask>
 			</p:panel>
 
 			<h:outputText value="Telefone celular:" />
 			<p:panel>
-				<p:inputText value="#{formCondominioBean.condominio.telefone.dddTelefoneCelular}" size="1" maxlength="2" />
-				<p:inputText value="#{formCondominioBean.condominio.telefone.numeroTelefoneCelular}">
+				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
+				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
 					<f:validator validatorId="telefoneValidator" />
-				</p:inputText>
+				</p:inputMask>
 			</p:panel>
 		</p:panelGrid>
 
@@ -82,7 +81,7 @@
 
 			<h:column>
 				<f:facet name="header">Nome do Bloco</f:facet>
-				<h:inputText value="#{bl.nome}" size="30" pt:placeholder="Nome do bloco, torre, lote, etc..." />
+				<h:inputText value="#{bl.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
 			</h:column>
 
 			<h:column>
@@ -105,7 +104,7 @@
 				<td><p:outputLabel disabled="true" value="#{formCondominioBean.blocosBean.size() + 1}"><f:convertNumber pattern="00" /></p:outputLabel></td>
 				<td><p:inputText id="nomeBloco"  value="#{formCondominioBean.nomeBlocoBean}" size="30" placeholder="Nome do bloco, torre, lote, etc..." /></td>
 				<td><p:inputText id="unidadesBloco" value="#{formCondominioBean.unidadesBlocoBean}" size="85" converter="unidadesConverter"
-						pt:placeholder="Informe o número das unidades separados por vírgula. Ex: 101,102,103,104,201,202,203,204" /></td>
+						placeholder="Informe o número das unidades separados por vírgula. Ex: 101,102,103,104,201,202,203,204" /></td>
 				<td><p:commandButton actionListener="#{formCondominioBean.adicionarBloco}" update="@form" icon="ui-icon-plusthick" /></td>
 			</tr>
 		</table>
