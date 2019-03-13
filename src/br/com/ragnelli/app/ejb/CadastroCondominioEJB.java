@@ -23,13 +23,18 @@ public class CadastroCondominioEJB {
 		return endereco;
 	}
 	
-	public void buscarCondominio(Condominio condominio) throws  CadastroException {
+	public void verificaCondominioJaCadastrado(Condominio condominio) throws  CadastroException {
 		
 		List<Condominio> condominios = em.createQuery("SELECT c FROM Condominio c ORDER BY c.nome", Condominio.class).getResultList();
 		
 		if(condominios.contains(condominio)) {
-			throw new CadastroException("Já existe um condomínio cadastrado com este endereço!");
+			throw new CadastroException("Já existe um condomínio cadastrado neste endereço!");
 		}
+	}
+	
+	public Bloco buscarBlocoPorId(Integer blocoId) {
+		Bloco bloco = em.find(Bloco.class, blocoId);
+		return bloco;
 	}
 	
 	public void gravar(Condominio condominio, List<Bloco> blocos) {

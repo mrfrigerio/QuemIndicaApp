@@ -14,6 +14,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.print.attribute.standard.Severity;
 
 import br.com.ragnelli.app.ejb.CadastroCondominioEJB;
 import br.com.ragnelli.app.exception.CadastroException;
@@ -118,23 +119,25 @@ public class CadastroCondominioBean implements Serializable {
 	public String gravar() {
 
 		try {
-			cadastro.buscarCondominio(condominio);
+			cadastro.verificaCondominioJaCadastrado(condominio);
 			adicionarBloco();
 			cadastro.gravar(condominio, blocosBean);
-			context.addMessage(null, new FacesMessage("Condomínio Cadastrado com Sucesso!!!"));
+			FacesMessage msg = new FacesMessage("Condomínio Cadastrado com Sucesso!!!");
+			msg.setSeverity(FacesMessage.SEVERITY_INFO);
+			context.addMessage(null, msg);
 			conversation.end();
 			return "cadastrarCondominio?faces-redirect=true";
 
 		} catch (CadastroException e) {
-
-			context.addMessage(null, new FacesMessage(e.getMessage()));
+			FacesMessage msg = new FacesMessage(e.getMessage());
+			msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+			context.addMessage(null, msg);
 			return null;
 		}
 
 	}
 	
 	public String limpar() {
-//		context.renderResponse();
 		conversation.end();
 		return "cadastrarCondominio?faces-redirect=true";
 	}

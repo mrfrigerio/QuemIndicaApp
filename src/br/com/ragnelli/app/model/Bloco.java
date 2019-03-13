@@ -75,6 +75,13 @@ public class Bloco implements Serializable {
 	public void setCondominio(Condominio condominio) {
 		this.condominio = condominio;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return String.valueOf(id);
+	}
 
 	@Override
 	public int hashCode() {
