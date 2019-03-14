@@ -68,53 +68,45 @@
 			</p:panel>
 		</p:panelGrid>
 
-		<hr />
-
-		<h:dataTable id="blocosDataTable" value="#{formCondominioBean.blocosModelBean}" var="bl" rendered="#{formCondominioBean.blocosBean.size() > 0}">
-
-			<h:column>
+		<p:dataTable id="blocosDataTable" value="#{formCondominioBean.blocosBean}" var="bl" rendered="#{formCondominioBean.blocosBean.size() > 0}"
+					rowIndexVar="i">
+			<p:column width="10">
 				<f:facet name="header">#</f:facet>
-				<h:outputText value="#{formCondominioBean.blocosModelBean.rowIndex + 1}">
+				<p:outputLabel value="#{i + 1}">
 					<f:convertNumber pattern="00" />
-				</h:outputText>
-			</h:column>
+				</p:outputLabel>
+			</p:column>
 
-			<h:column>
+			<p:column width="60">
 				<f:facet name="header">Nome do Bloco</f:facet>
-				<h:inputText value="#{bl.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
-			</h:column>
+				<p:inputText value="#{bl.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
+			</p:column>
+		</p:dataTable>
 
-			<h:column>
-				<f:facet name="header">Unidades</f:facet>
-				<h:inputText value="#{bl.unidades}" size="85" converter="unidadesConverter" placeholder="Informe o número das unidades separados por vírgula. Ex: 101,102,103,104,201,202,203,204" />
-			</h:column>
+		<p:dataTable id="blocosTable" value="#{formCondominioBean.blocoBean}" var="bb" rendered="#{formCondominioBean.blocosBean.size() >= 0}">
+			<p:column width="10">
+				<f:facet name="header">#</f:facet>
+				<p:outputLabel disabled="true" value="#{formCondominioBean.blocosBean.size() + 1}"><f:convertNumber pattern="00" /></p:outputLabel>
+			</p:column>
 
-		</h:dataTable>
-
-		<table id="blocosTable">
-			<p:panel rendered="#{formCondominioBean.blocosBean.size() == 0}">
-				<tr>
-					<th>#</th>
-					<th>Nome do Bloco</th>
-					<th>Unidades</th>
-					<th></th>
-				</tr>
-			</p:panel>
-			<tr>
-				<td><p:outputLabel disabled="true" value="#{formCondominioBean.blocosBean.size() + 1}"><f:convertNumber pattern="00" /></p:outputLabel></td>
-				<td><p:inputText id="nomeBloco"  value="#{formCondominioBean.nomeBlocoBean}" size="30" placeholder="Nome do bloco, torre, lote, etc..." /></td>
-				<td><p:inputText id="unidadesBloco" value="#{formCondominioBean.unidadesBlocoBean}" size="85" converter="unidadesConverter"
-						placeholder="Informe o número das unidades separados por vírgula. Ex: 101,102,103,104,201,202,203,204" /></td>
-				<td><p:commandButton actionListener="#{formCondominioBean.adicionarBloco}" update="@form" icon="ui-icon-plusthick" /></td>
-			</tr>
-		</table>
-		<hr />
+			<p:column width="60">
+				<f:facet name="header">Nome do Bloco</f:facet>
+				<p:inputText value="#{bb.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
+			</p:column>
+			
+			<p:column width="30">
+				<f:facet name="header"></f:facet>
+				<p:commandButton  action="#{formCondominioBean.adicionarBloco}" 
+								  process="@form" 
+								  update="@form" 
+								  partialSubmit="true" icon="ui-icon-plusthick" />
+			</p:column>
+		</p:dataTable>
+		
 		
 		<p:commandButton value="Gravar" action="#{formCondominioBean.gravar}" update="@form" icon="ui-icon-disk" iconPos="right" />
 		
-		<h:commandButton value="Limpar" action="#{formCondominioBean.limpar}" immediate="true">
-			<f:ajax event="action" execute="@form" render="@form" />
-		</h:commandButton>
+		<p:commandButton value="Limpar" listener="#{formCondominioBean.limpar}" process="@form" update="@form" />
 
 	</h:form>
 </h:body>

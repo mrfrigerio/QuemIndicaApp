@@ -36,6 +36,10 @@ public class Bloco implements Serializable {
 
 	}
 
+	public Bloco(String nome) {
+		this.nome = nome;
+	}
+
 	public Bloco(String nome, List<Integer> unidades) {
 		this.nome = nome;
 		this.unidades = unidades;

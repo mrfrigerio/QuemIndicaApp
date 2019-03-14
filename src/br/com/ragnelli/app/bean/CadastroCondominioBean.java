@@ -11,7 +11,6 @@ import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.model.ListDataModel;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,18 +35,13 @@ public class CadastroCondominioBean implements Serializable {
 	FacesContext context;
 
 	private Condominio condominio;
-
-	private List<Bloco> blocosBean;
-	private ListDataModel<Bloco> blocosModelBean;
-
-	private String nomeBlocoBean;
-	private List<Integer> unidadesBlocoBean;
+	private Bloco blocoBean;
+	private List<Bloco> blocosBean = new ArrayList<>();
 
 	@PostConstruct
 	private void init() {
 		conversation.begin();
-		blocosBean = new ArrayList<>();
-		blocosModelBean = new ListDataModel<>(blocosBean);
+		blocoBean = new Bloco("");
 	}
 
 	public Condominio getCondominio() {
@@ -64,11 +58,16 @@ public class CadastroCondominioBean implements Serializable {
 	public TipoCondominio[] getTipos() {
 		return TipoCondominio.values();
 	}
+	
+	public Bloco getBlocoBean() {
+		return blocoBean;
+	}
+
+	public void setBlocoBean(Bloco blocoBean) {
+		this.blocoBean = blocoBean;
+	}
 
 	public List<Bloco> getBlocosBean() {
-		if (blocosBean == null) {
-			blocosBean = new ArrayList<>();
-		}
 		return blocosBean;
 	}
 
@@ -76,40 +75,10 @@ public class CadastroCondominioBean implements Serializable {
 		this.blocosBean = blocosBean;
 	}
 
-	public String getNomeBlocoBean() {
-		return nomeBlocoBean;
-	}
-
-	public void setNomeBlocoBean(String nomePrimeiroBlocoBean) {
-		this.nomeBlocoBean = nomePrimeiroBlocoBean;
-	}
-
-	public List<Integer> getUnidadesBlocoBean() {
-		if (unidadesBlocoBean == null) {
-			unidadesBlocoBean = new ArrayList<>();
-		}
-
-		return unidadesBlocoBean;
-	}
-
-	public void setUnidadesBlocoBean(List<Integer> unidadesPrimeiroBloco) {
-		this.unidadesBlocoBean = unidadesPrimeiroBloco;
-	}
-
-	public ListDataModel<Bloco> getBlocosModelBean() {
-		return blocosModelBean;
-	}
-
-	public void setBlocosModelBean(ListDataModel<Bloco> blocosModelBean) {
-		this.blocosModelBean = blocosModelBean;
-	}
-
 	public String adicionarBloco() {
-		if (!nomeBlocoBean.isBlank()) {
-			Bloco bloco = new Bloco(nomeBlocoBean, unidadesBlocoBean);
-			blocosBean.add(bloco);
-			nomeBlocoBean = null;
-			unidadesBlocoBean = null;
+		if (!blocoBean.getNome().isBlank()) {
+			blocosBean.add(blocoBean);
+			blocoBean = new Bloco("");
 		}
 
 		return null;
