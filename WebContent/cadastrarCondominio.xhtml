@@ -1,113 +1,184 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" 
-	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
-	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
-	  xmlns:p="http://primefaces.org/ui">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 	<title>Quem Indica Indicações</title>
-</h:head>
 
-<h:body> 
+</h:head>
+<h:outputStylesheet library="css" name="styles.css" />
+<h:body>
+
 	<h:form id="form">
 		<h:inputHidden value="#{formCondominioBean.condominio.id}" />
+		<p:panelGrid>
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">
+					Cadastro de Condomínios
+				</p:column>
+				</p:row>
+			</f:facet>
 
-		<p:messages />
-		<p:panelGrid columns="2">
-			
-			<f:facet name="header">Cadastro de Condomínios</f:facet>
-			
-			<p:outputLabel value="Nome:" for="nomeCondominioId" />
-			<p:inputText id="nomeCondominioId" value="#{formCondominioBean.condominio.nome}" required="true" label="Nome" />
+			<p:row>
+				<p:column colspan="2">
+					<p:messages closable="true" />
+				</p:column>
+			</p:row>
 
-			<p:outputLabel value="Tipo de Condomínio:" />
-			<p:selectOneButton value="#{formCondominioBean.condominio.tipo}" required = "true">
-				<f:selectItem itemLabel="Prédios" itemValue="Predios" />
-				<f:selectItem itemLabel="Casas" itemValue="Casas" />
-			</p:selectOneButton>
-			
-			<p:outputLabel value="CEP:" />
-			<p:inputMask value="#{formCondominioBean.condominio.endereco.cep}" mask="99999-999" maxlength="9" size="9" required="true">
-				<f:ajax event="blur" execute="@this" render="form:logradouro form:bairro form:estado" listener="#{formCondominioBean.buscaCep}" />
-			</p:inputMask>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Nome:" for="nomeCondominioId" />
+				</p:column>
 
-			<p:outputLabel value="Logradouro:" />
-			<p:inputText id="logradouro" value="#{formCondominioBean.condominio.endereco.logradouro}" required="true" />
+				<p:column>
+					<p:inputText id="nomeCondominioId" value="#{formCondominioBean.condominio.nome}" required="true" label="Nome" size="40" />
+				</p:column>
 
-			<p:outputLabel value="Número" />
-			<p:inputText value="#{formCondominioBean.condominio.endereco.numero}" required="true" />
+			</p:row>
 
-			<p:outputLabel value="Complemento:" />
-			<p:inputText value="#{formCondominioBean.condominio.endereco.complemento}" />
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Tipo de Condomínio:" />
+				</p:column>
 
-			<p:outputLabel value="Bairro:" />
-			<p:inputText id="bairro" value="#{formCondominioBean.condominio.endereco.bairro}" required="true" />
+				<p:column>
+					<p:selectOneRadio value="#{formCondominioBean.condominio.tipo}" required="true">
+						<f:selectItem itemLabel="Prédios" itemValue="Predios" />
+						<f:selectItem itemLabel="Casas" itemValue="Casas" />
+					</p:selectOneRadio>
+				</p:column>
+			</p:row>
 
-			<p:outputLabel value="Estado:" />
-			<p:inputText id="estado" value="#{formCondominioBean.condominio.endereco.estado}" required="true" />
+			<p:row>
+				<p:column>
+					<p:outputLabel value="CEP:" />
+				</p:column>
+				<p:column>
+					<p:inputMask value="#{formCondominioBean.condominio.endereco.cep}" mask="99999-999" maxlength="9" size="9" required="true">
+						<f:ajax event="blur" execute="@this" render="form:logradouro form:bairro form:estado" listener="#{formCondominioBean.buscaCep}" />
+					</p:inputMask>
+				</p:column>
+			</p:row>
 
-			<p:outputLabel value="Ponto de Referência:" />
-			<p:inputText id="pontoDeReferencia" value="#{formCondominioBean.condominio.endereco.pontoDeReferencia}" />
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Logradouro:" />
+				</p:column>
+				<p:column>
+					<p:inputText id="logradouro" value="#{formCondominioBean.condominio.endereco.logradouro}" required="true" size="40" />
+				</p:column>
+			</p:row>
 
-			<p:outputLabel value="Telefone fixo:" />
-			<h:panelGroup>
-				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)" />
-				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999">
-					<f:validator validatorId="telefoneValidator" />
-				</p:inputMask>
-			</h:panelGroup>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Número" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{formCondominioBean.condominio.endereco.numero}" required="true" size="5" />
+				</p:column>
+			</p:row>
 
-			<h:outputText value="Telefone celular:" />
-			<h:panelGroup>
-				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
-				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
-					<f:validator validatorId="telefoneValidator" />
-				</p:inputMask>
-			</h:panelGroup>
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Complemento:" />
+				</p:column>
+				<p:column>
+					<p:inputText value="#{formCondominioBean.condominio.endereco.complemento}" size="30" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Bairro:" />
+				</p:column>
+				<p:column>
+					<p:inputText id="bairro" value="#{formCondominioBean.condominio.endereco.bairro}" required="true" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Estado:" />
+				</p:column>
+				<p:column>
+					<p:autoComplete id="estado" value="#{formCondominioBean.condominio.endereco.nomeEstado}" required="true" dropdown="true" forceSelection="true" completeMethod="#{formCondominioBean.getEstados}" var="e" itemLabel="#{e}" itemValue="#{e}"
+						scrollHeight="150" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Ponto de Referência:" />
+				</p:column>
+				<p:column>
+					<p:inputText id="pontoDeReferencia" value="#{formCondominioBean.condominio.endereco.pontoDeReferencia}" size="25" />
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<p:outputLabel value="Telefone fixo:" />
+				</p:column>
+				<p:column>
+					<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask="(99)" />
+					<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999">
+						<f:validator validatorId="telefoneValidator" />
+					</p:inputMask>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column>
+					<h:outputText value="Telefone celular:" />
+				</p:column>
+				<p:column>
+					<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask="(99)" />
+					<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
+						<f:validator validatorId="telefoneValidator" />
+					</p:inputMask>
+				</p:column>
+			</p:row>
+
+			<p:row>
+				<p:column rowspan="2">
+					<p:outputLabel value="Blocos:" />
+				</p:column>
+
+				<p:column>
+					<ui:repeat id="blocosDataTable" value="#{formCondominioBean.blocosBean}" varStatus="i" var="bl" rendered="#{formCondominioBean.blocosBean.size() >= 0}" rowIndexVar="i">
+						<p:outputLabel value="#{i.index + 1} ">
+							<f:convertNumber pattern="00" />
+						</p:outputLabel>
+						<p:inputText value="#{bl.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
+						<p:commandLink action="#{formCondominioBean.removerBloco(bl)}" process="@form" update="@form" partialSubmit="true" value=" [ - ]" style="text-decoration: none" />
+						<br />
+					</ui:repeat>
+
+					<p:row>
+						<ui:repeat id="blocosTable" value="#{formCondominioBean.blocoBean}" var="bb" rendered="#{formCondominioBean.blocosBean.size() >= 0}">
+							<p:column>
+								<h:panelGroup>
+									<p:outputLabel value="#{formCondominioBean.blocosBean.size() + 1} " />
+									<p:inputText value="#{bb.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
+									<p:commandButton action="#{formCondominioBean.adicionarBloco}" process="@form" update="@form" partialSubmit="true" icon="ui-icon-plusthick" />
+								</h:panelGroup>
+							</p:column>
+						</ui:repeat>
+					</p:row>
+				</p:column>
+
+			</p:row>
+			<f:facet name="footer">
+				<p:row>
+					<p:column colspan="2">
+						<p:commandButton value="Gravar" action="#{formCondominioBean.gravar}" update="@form" icon="ui-icon-disk" iconPos="right" />
+						<p:commandButton value="Limpar" action="#{formCondominioBean.limpar}" process="@this" update="@form" immediate="true" />
+					</p:column>
+				</p:row>
+			</f:facet>
 		</p:panelGrid>
-
-		<p:dataTable id="blocosDataTable" value="#{formCondominioBean.blocosBean}" var="bl" rendered="#{formCondominioBean.blocosBean.size() > 0}"
-					rowIndexVar="i">
-			<p:column width="10">
-				<f:facet name="header">#</f:facet>
-				<p:outputLabel value="#{i + 1}">
-					<f:convertNumber pattern="00" />
-				</p:outputLabel>
-			</p:column>
-
-			<p:column width="60">
-				<f:facet name="header">Nome do Bloco</f:facet>
-				<p:inputText value="#{bl.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
-			</p:column>
-		</p:dataTable>
-
-		<p:dataTable id="blocosTable" value="#{formCondominioBean.blocoBean}" var="bb" rendered="#{formCondominioBean.blocosBean.size() >= 0}">
-			<p:column width="10">
-				<f:facet name="header">#</f:facet>
-				<p:outputLabel disabled="true" value="#{formCondominioBean.blocosBean.size() + 1}"><f:convertNumber pattern="00" /></p:outputLabel>
-			</p:column>
-
-			<p:column width="60">
-				<f:facet name="header">Nome do Bloco</f:facet>
-				<p:inputText value="#{bb.nome}" size="30" placeholder="Nome do bloco, torre, lote, etc..." />
-			</p:column>
-			
-			<p:column width="30">
-				<f:facet name="header"></f:facet>
-				<p:commandButton  action="#{formCondominioBean.adicionarBloco}" 
-								  process="@form" 
-								  update="@form" 
-								  partialSubmit="true" icon="ui-icon-plusthick" />
-			</p:column>
-		</p:dataTable>
-		
-		
-		<p:commandButton value="Gravar" action="#{formCondominioBean.gravar}" update="@form" icon="ui-icon-disk" iconPos="right" />
-		
-		<p:commandButton value="Limpar" listener="#{formCondominioBean.limpar}" process="@this" update="@form" immediate="true" />
-
 	</h:form>
 </h:body>
 </html>

@@ -18,6 +18,7 @@ public class CadastroCondominioEJB {
 	@PersistenceContext
 	private EntityManager em;
 	
+	
 	public Endereco buscarCep(String cep) {
 		Endereco endereco = WSConsumer.buscaEnderecoByCep(cep);
 		return endereco;
@@ -48,5 +49,6 @@ public class CadastroCondominioEJB {
 			bloco.setCondominio(condominio);
 		}
 	}
+	
 
 }

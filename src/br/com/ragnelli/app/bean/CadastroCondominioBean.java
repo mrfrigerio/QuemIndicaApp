@@ -3,6 +3,9 @@ package br.com.ragnelli.app.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -14,6 +17,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.ragnelli.app.ejb.ApplicationEJB;
 import br.com.ragnelli.app.ejb.CadastroCondominioEJB;
 import br.com.ragnelli.app.exception.CadastroException;
 import br.com.ragnelli.app.model.Bloco;
@@ -27,7 +31,10 @@ public class CadastroCondominioBean implements Serializable {
 
 	@EJB
 	CadastroCondominioEJB cadastro;
-
+	
+	@EJB
+	ApplicationEJB appEJB;
+	
 	@Inject
 	Conversation conversation;
 
@@ -85,6 +92,21 @@ public class CadastroCondominioBean implements Serializable {
 
 		return null;
 	}
+	public String removerBloco(Bloco bloco) {
+		blocosBean.remove(bloco);
+		return null;
+	}
+	
+	public List<String> getEstados(String nomeEstado){
+		
+		Pattern pattern = Pattern.compile("(?i:.*" + nomeEstado + "+.*)");
+		return appEJB.getEstados().stream()
+				.filter(e -> {
+					Matcher matcher = pattern.matcher(e);
+					return matcher.matches();
+				})
+				.collect(Collectors.toList());
+	}
 
 	public String gravar() {
 
@@ -95,8 +117,7 @@ public class CadastroCondominioBean implements Serializable {
 			FacesMessage msg = new FacesMessage("Condomínio Cadastrado com Sucesso!!!");
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			context.addMessage(null, msg);
-			conversation.end();
-			return null;
+			return limpar();
 
 		} catch (CadastroException e) {
 			FacesMessage msg = new FacesMessage(e.getMessage());
@@ -109,19 +130,20 @@ public class CadastroCondominioBean implements Serializable {
 	
 	public String limpar() {
 		conversation.end();
-//		init();
-//		return null;
+		init();
+		return null;
 		
-		return "cadastrarCondominio?faces-redirect=true";
+//		return "cadastrarCondominio?faces-redirect=true";
 	}
 
 	public String buscaCep(AjaxBehaviorEvent event) {
+		
 		try {
 			Endereco end = cadastro.buscarCep(condominio.getEndereco().getCep());
 			condominio.getEndereco().setCep(end.getCep());
 			condominio.getEndereco().setLogradouro(end.getLogradouro());
 			condominio.getEndereco().setBairro(end.getBairro());
-			condominio.getEndereco().setEstado(end.getEstado());
+			condominio.getEndereco().setNomeEstado(end.getNomeEstado());
 
 		} catch (Exception e) {
 			System.out.println("CEP não localizado!");

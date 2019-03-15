@@ -27,9 +27,9 @@ public class Endereco implements Serializable {
 	@Column(length = 150)
 	private String pontoDeReferencia;
 	
-	@JsonbProperty("uf")
-	@Column(nullable = false, length = 2)
-	private String estado;
+	@JsonbProperty("localidade")
+	@Column(nullable = false, length = 20)
+	private String nomeEstado;
 
 	public String getCep() {
 		return cep;
@@ -71,12 +71,12 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 	}
 
-	public String getEstado() {
-		return estado;
+	public String getNomeEstado() {
+		return nomeEstado;
 	}
 
-	public void setEstado(String estado) {
-		this.estado = estado;
+	public void setNomeEstado(String nomeEstado) {
+		this.nomeEstado = nomeEstado;
 	}
 
 	public String getPontoDeReferencia() {
@@ -120,7 +120,7 @@ public class Endereco implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Endereco [cep=" + cep + ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + ", bairro=" + bairro + ", estado=" + estado + "]";
+		return "Endereco [cep=" + cep + ", logradouro=" + logradouro + ", numero=" + numero + ", complemento=" + complemento + ", bairro=" + bairro + ", estado=" + nomeEstado + "]";
 	}
 
 	

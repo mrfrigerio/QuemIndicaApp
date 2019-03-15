@@ -10,10 +10,15 @@ public class WSConsumer {
 
 	public static Endereco buscaEnderecoByCep(String cep) {
 		Client client = ClientBuilder.newClient();
-		Endereco endereco = client.target("http://viacep.com.br/ws/")
-								  .path(cep + "/json")
-								  .request(MediaType.APPLICATION_JSON)
-								  .get(Endereco.class);
-		return endereco;
+		
+		if (cep != null && !cep.isBlank()) {
+			Endereco endereco = client.target("http://viacep.com.br/ws/")
+									  .path(cep + "/json")
+									  .request(MediaType.APPLICATION_JSON)
+									  .get(Endereco.class);
+			return endereco;
+		}
+		
+		return null;
 	}
 }

@@ -50,7 +50,7 @@ public class CadastroPrestadorBean implements Serializable {
 			prestador.getEndereco().setCep(end.getCep());
 			prestador.getEndereco().setLogradouro(end.getLogradouro());
 			prestador.getEndereco().setBairro(end.getBairro());
-			prestador.getEndereco().setEstado(end.getEstado());
+			prestador.getEndereco().setNomeEstado(end.getNomeEstado());
 
 		} catch (Exception e) {
 			System.out.println("CEP não localizado!");

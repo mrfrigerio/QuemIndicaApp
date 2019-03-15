@@ -17,3 +17,7 @@
 	width: 20em;
 	
 }
+
+.ui-panelgrid-footer {
+	text-align: right !important;
+}
