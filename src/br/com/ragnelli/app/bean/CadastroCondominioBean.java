@@ -36,11 +36,13 @@ public class CadastroCondominioBean implements Serializable {
 
 	private Condominio condominio;
 	private Bloco blocoBean;
-	private List<Bloco> blocosBean = new ArrayList<>();
+	private List<Bloco> blocosBean;
 
 	@PostConstruct
 	private void init() {
 		conversation.begin();
+		condominio = new Condominio();
+		blocosBean = new ArrayList<>();
 		blocoBean = new Bloco("");
 	}
 
@@ -94,7 +96,7 @@ public class CadastroCondominioBean implements Serializable {
 			msg.setSeverity(FacesMessage.SEVERITY_INFO);
 			context.addMessage(null, msg);
 			conversation.end();
-			return "cadastrarCondominio?faces-redirect=true";
+			return null;
 
 		} catch (CadastroException e) {
 			FacesMessage msg = new FacesMessage(e.getMessage());
@@ -107,6 +109,9 @@ public class CadastroCondominioBean implements Serializable {
 	
 	public String limpar() {
 		conversation.end();
+//		init();
+//		return null;
+		
 		return "cadastrarCondominio?faces-redirect=true";
 	}
 

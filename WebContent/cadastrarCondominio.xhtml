@@ -22,16 +22,16 @@
 			<p:outputLabel value="Nome:" for="nomeCondominioId" />
 			<p:inputText id="nomeCondominioId" value="#{formCondominioBean.condominio.nome}" required="true" label="Nome" />
 
-			<p:outputLabel value="Tipo:" />
-			<h:selectOneMenu value="#{formCondominioBean.condominio.tipo}" required="true">
-				<f:selectItem itemLabel="-- Selecione --" noSelectionOption="true" />
-				<f:selectItems value="#{formCondominioBean.tipos}" />
-			</h:selectOneMenu>
-
+			<p:outputLabel value="Tipo de Condomínio:" />
+			<p:selectOneButton value="#{formCondominioBean.condominio.tipo}" required = "true">
+				<f:selectItem itemLabel="Prédios" itemValue="Predios" />
+				<f:selectItem itemLabel="Casas" itemValue="Casas" />
+			</p:selectOneButton>
+			
 			<p:outputLabel value="CEP:" />
-			<p:inputText value="#{formCondominioBean.condominio.endereco.cep}" required="true">
+			<p:inputMask value="#{formCondominioBean.condominio.endereco.cep}" mask="99999-999" maxlength="9" size="9" required="true">
 				<f:ajax event="blur" execute="@this" render="form:logradouro form:bairro form:estado" listener="#{formCondominioBean.buscaCep}" />
-			</p:inputText>
+			</p:inputMask>
 
 			<p:outputLabel value="Logradouro:" />
 			<p:inputText id="logradouro" value="#{formCondominioBean.condominio.endereco.logradouro}" required="true" />
@@ -52,20 +52,20 @@
 			<p:inputText id="pontoDeReferencia" value="#{formCondominioBean.condominio.endereco.pontoDeReferencia}" />
 
 			<p:outputLabel value="Telefone fixo:" />
-			<p:panel>
+			<h:panelGroup>
 				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)" />
 				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999">
 					<f:validator validatorId="telefoneValidator" />
 				</p:inputMask>
-			</p:panel>
+			</h:panelGroup>
 
 			<h:outputText value="Telefone celular:" />
-			<p:panel>
+			<h:panelGroup>
 				<p:inputMask value="#{formCondominioBean.condominio.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
 				<p:inputMask value="#{formCondominioBean.condominio.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
 					<f:validator validatorId="telefoneValidator" />
 				</p:inputMask>
-			</p:panel>
+			</h:panelGroup>
 		</p:panelGrid>
 
 		<p:dataTable id="blocosDataTable" value="#{formCondominioBean.blocosBean}" var="bl" rendered="#{formCondominioBean.blocosBean.size() > 0}"
@@ -106,7 +106,7 @@
 		
 		<p:commandButton value="Gravar" action="#{formCondominioBean.gravar}" update="@form" icon="ui-icon-disk" iconPos="right" />
 		
-		<p:commandButton value="Limpar" listener="#{formCondominioBean.limpar}" process="@form" update="@form" />
+		<p:commandButton value="Limpar" listener="#{formCondominioBean.limpar}" process="@this" update="@form" immediate="true" />
 
 	</h:form>
 </h:body>
