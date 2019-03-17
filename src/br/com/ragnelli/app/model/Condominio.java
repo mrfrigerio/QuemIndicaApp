@@ -44,7 +44,7 @@ public class Condominio implements Serializable {
 	private List<Bloco> blocos;
 
 	@OneToMany(mappedBy = "condominio")
-	private Set<Morador> moradores;
+	private Set<Usuario> usuarios;
 
 	public Integer getId() {
 		return id;
@@ -108,15 +108,15 @@ public class Condominio implements Serializable {
 		this.blocos = blocos;
 	}
 
-	public Set<Morador> getMoradores() {
-		if (moradores == null) {
-			moradores = new TreeSet<>();
+	public Set<Usuario> getUsuarios() {
+		if (usuarios == null) {
+			usuarios = new TreeSet<>();
 		}
-		return moradores;
+		return usuarios;
 	}
 
-	public void setMoradores(Set<Morador> moradores) {
-		this.moradores = moradores;
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	@Override

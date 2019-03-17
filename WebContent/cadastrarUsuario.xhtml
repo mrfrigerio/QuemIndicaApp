@@ -14,37 +14,37 @@
 
 	<h:form id="form">
 
-		<h:inputHidden value="#{formMoradorBean.morador.id}" />
+		<h:inputHidden value="#{formUsuarioBean.usuario.id}" />
 		<p:messages />
 		<p:panelGrid columns="2">
 
-			<f:facet name="header">Cadastro de Moradores</f:facet>
+			<f:facet name="header">Cadastro de Usuários</f:facet>
 
 			<p:outputLabel for="nome" value="Nome:" />
-			<p:inputText id="nome" value="#{formMoradorBean.morador.nome}" size="50" required="true" />
+			<p:inputText id="nome" value="#{formUsuarioBean.usuario.nome}" size="50" required="true" />
 
 			<p:outputLabel for="email" value="e-mail:" />
-			<p:inputText id="email" value="#{formMoradorBean.morador.email}" size="50" type="email" required="true" />
+			<p:inputText id="email" value="#{formUsuarioBean.usuario.email}" size="50" type="email" required="true" />
 
 			<p:outputLabel value="Telefone fixo:" />
 			<h:panelGroup>
-				<p:inputMask value="#{formMoradorBean.morador.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)"/>
-				<p:inputMask value="#{formMoradorBean.morador.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999" >
+				<p:inputMask value="#{formUsuarioBean.usuario.telefone.dddTelefoneFixo}" size="4" maxlength="4" mask = "(99)"/>
+				<p:inputMask value="#{formUsuarioBean.usuario.telefone.numeroTelefoneFixo}" size="10" maxlength="9" mask="9999-9999" >
 					<f:validator validatorId="telefoneValidator" />
 				</p:inputMask>
 			</h:panelGroup>
 
 			<p:outputLabel value="Telefone celular:" />
 			<h:panelGroup>
-				<p:inputMask value="#{formMoradorBean.morador.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
-				<p:inputMask value="#{formMoradorBean.morador.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
+				<p:inputMask value="#{formUsuarioBean.usuario.telefone.dddTelefoneCelular}" size="4" maxlength="4" mask = "(99)" />
+				<p:inputMask value="#{formUsuarioBean.usuario.telefone.numeroTelefoneCelular}" size="10" maxlength="10" mask="99999-9999">
 					<f:validator validatorId="telefoneValidator" />
 				</p:inputMask>
 			</h:panelGroup>
 
 			<p:outputLabel for="frmCondominio" value="Condomínio:" />
-			<p:autoComplete id="frmCondominio" value="#{formMoradorBean.morador.condominio}" required="true" dropdown="true" forceSelection="true"
-							completeMethod="#{formMoradorBean.condominioAutocomplete}" 
+			<p:autoComplete id="frmCondominio" value="#{formUsuarioBean.usuario.condominio}" required="true" dropdown="true" forceSelection="true"
+							completeMethod="#{formUsuarioBean.condominioAutocomplete}" 
 							var="c"
 							itemLabel="#{c.nome}"
 							itemValue="#{c}"
@@ -53,26 +53,26 @@
 			</p:autoComplete>
 			
 			<p:outputLabel for="frmBloco" value="Bloco:" />				
-			<p:autoComplete id="frmBloco" value="#{formMoradorBean.morador.bloco}" required="true" dropdown="true" forceSelection="true"
-							completeMethod="#{formMoradorBean.blocoAutocomplete}" 
+			<p:autoComplete id="frmBloco" value="#{formUsuarioBean.usuario.bloco}" required="true" dropdown="true" forceSelection="true"
+							completeMethod="#{formUsuarioBean.blocoAutocomplete}" 
 							var="b"
 							itemLabel="#{b.nome}"
 							itemValue="#{b}"
 							converter="blocoConverter"/>
 
 			<p:outputLabel value="Unidade:" />
-			<p:inputText value="#{formMoradorBean.morador.unidade}" required="true" />
+			<p:inputText value="#{formUsuarioBean.usuario.unidade}" required="true" />
 
 			<p:outputLabel for="pwd1" value="Senha:" />
-			<p:password id="pwd1" value="#{formMoradorBean.morador.senha}" match="pwd2" required="true" feedback="true" 
+			<p:password id="pwd1" value="#{formUsuarioBean.usuario.senha}" match="pwd2" required="true" feedback="true" 
 						validatorMessage="As senhas não conferem!" 
 						promptLabel="Digite uma senha."/>
 
 			<p:outputLabel for="pwd2" value="Confirmação de Senha:" />
-			<p:password id="pwd2" value="#{formMoradorBean.passwordCheck}" required="true" feedback="true" promptLabel="Confirme a senha digitada." />
+			<p:password id="pwd2" value="#{formUsuarioBean.passwordCheck}" required="true" feedback="true" promptLabel="Confirme a senha digitada." />
 
 			<f:facet name="footer">
-				<p:commandButton value="Gravar" action="#{formMoradorBean.gravar}" process="@form" update="@form" />
+				<p:commandButton value="Gravar" action="#{formUsuarioBean.gravar}" process="@form" update="@form" />
 			</f:facet>
 		</p:panelGrid>
 

@@ -6,14 +6,14 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-import br.com.ragnelli.app.ejb.CadastroMoradorEJB;
+import br.com.ragnelli.app.ejb.CadastroUsuarioEJB;
 import br.com.ragnelli.app.model.Condominio;
 
 @FacesConverter(value = "condominioConverter", managed = true)
 public class CondominioConverter implements Converter<Condominio> {
 	
 	@EJB
-	CadastroMoradorEJB cadastro;
+	CadastroUsuarioEJB cadastro;
 	
 	@Override
 	public Condominio getAsObject(FacesContext context, UIComponent component, String value) {

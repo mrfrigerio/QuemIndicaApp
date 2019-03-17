@@ -11,8 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Morador extends Pessoa implements Serializable {
-
+public class Usuario extends Pessoa implements Serializable {
+	
+	public enum PerfilUsuario {
+		Administrador_condominio, Administrador_sistema, Desenvolvedor, Morador;
+	}
+	
 	private String senha;
 
 	@ManyToOne
@@ -26,9 +30,12 @@ public class Morador extends Pessoa implements Serializable {
 	@Column(nullable = false)
 	private Integer unidade;
 
-	@OneToMany(mappedBy = "morador")
+	@OneToMany(mappedBy = "usuario")
 	private Set<Avaliacao> avaliacoes;
-
+	
+	@Column(length = 25)
+	private PerfilUsuario perfil;
+	
 	public String getSenha() {
 		return senha;
 	}
@@ -77,6 +84,16 @@ public class Morador extends Pessoa implements Serializable {
 	public void setAvaliacoes(Set<Avaliacao> avaliacoes) {
 		this.avaliacoes = avaliacoes;
 	}
+	
+	
+
+	public PerfilUsuario getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(PerfilUsuario perfil) {
+		this.perfil = perfil;
+	}
 
 	@Override
 	public int hashCode() {
@@ -94,9 +111,9 @@ public class Morador extends Pessoa implements Serializable {
 			return true;
 		if (!super.equals(obj))
 			return false;
-		if (!(obj instanceof Morador))
+		if (!(obj instanceof Usuario))
 			return false;
-		Morador other = (Morador) obj;
+		Usuario other = (Usuario) obj;
 		if (bloco == null) {
 			if (other.bloco != null)
 				return false;

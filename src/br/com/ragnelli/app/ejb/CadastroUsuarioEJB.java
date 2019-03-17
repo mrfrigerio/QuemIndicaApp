@@ -8,10 +8,10 @@ import javax.persistence.PersistenceContext;
 
 import br.com.ragnelli.app.model.Bloco;
 import br.com.ragnelli.app.model.Condominio;
-import br.com.ragnelli.app.model.Morador;
+import br.com.ragnelli.app.model.Usuario;
 
 @Stateless
-public class CadastroMoradorEJB {
+public class CadastroUsuarioEJB {
 
 	
 	@PersistenceContext
@@ -31,9 +31,9 @@ public class CadastroMoradorEJB {
 				.getResultList();
 	}
 	
-	public void gravar(Morador morador) {
+	public void gravar(Usuario usuario) {
 		
-		em.persist(morador);
+		em.persist(usuario);
 		
 	}
 

@@ -25,8 +25,8 @@ public class Avaliacao implements Serializable {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name = "morador_Id")
-	private Morador morador;
+	@JoinColumn(name = "usuario_Id")
+	private Usuario usuario;
 	
 	@ManyToOne
 	@JoinColumn(name = "prestador_id")
@@ -43,9 +43,9 @@ public class Avaliacao implements Serializable {
 	public Avaliacao() {
 	}
 	
-	public Avaliacao(Date data, Morador morador, TipoAvaliacao tipo, Prestador prestador, String motivo, Double nota) {
+	public Avaliacao(Date data, Usuario usuario, TipoAvaliacao tipo, Prestador prestador, String motivo, Double nota) {
 		this.data = data;
-		this.morador = morador;
+		this.usuario = usuario;
 		this.tipo = tipo;
 		this.prestador = prestador;
 		this.motivo = motivo;
@@ -60,12 +60,12 @@ public class Avaliacao implements Serializable {
 		this.id = id;
 	}
 
-	public Morador getMorador() {
-		return morador;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setMorador(Morador morador) {
-		this.morador = morador;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Prestador getPrestador() {

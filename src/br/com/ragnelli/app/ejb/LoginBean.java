@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import br.com.ragnelli.app.model.Morador;
+import br.com.ragnelli.app.model.Usuario;
 
 @Stateless
 public class LoginBean {
@@ -18,9 +18,9 @@ public class LoginBean {
 
 	public boolean verificaSenha(String email, String password) {
 
-		Morador morador = getMoradorByEmail(email);
+		Usuario usuario = getUsuarioByEmail(email);
 
-		if (morador != null && morador.getSenha().equals(password)) {
+		if (usuario != null && usuario.getSenha().equals(password)) {
 
 			return true;
 
@@ -32,22 +32,22 @@ public class LoginBean {
 
 	}
 
-	public Morador getMoradorByEmail(String email) {
+	public Usuario getUsuarioByEmail(String email) {
 
 		// Utilizando a Criteria API
 
 		try {
 			CriteriaBuilder cb = em.getCriteriaBuilder();
-			CriteriaQuery<Morador> cq = cb.createQuery(Morador.class);
-			Root<Morador> morador = cq.from(Morador.class);
-			cq.select(morador);
+			CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+			Root<Usuario> usuario = cq.from(Usuario.class);
+			cq.select(usuario);
 //			cq.where(cb.equal(morador.get(Morador_.email), email));
 
-			TypedQuery<Morador> q = em.createQuery(cq);
+			TypedQuery<Usuario> q = em.createQuery(cq);
 
-			Morador moradorFound = q.getSingleResult();
+			Usuario usuarioFound = q.getSingleResult();
 
-			return moradorFound;
+			return usuarioFound;
 
 		} catch (Exception e) {
 

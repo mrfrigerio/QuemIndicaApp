@@ -15,20 +15,20 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import br.com.ragnelli.app.ejb.CadastroMoradorEJB;
+import br.com.ragnelli.app.ejb.CadastroUsuarioEJB;
 import br.com.ragnelli.app.model.Bloco;
 import br.com.ragnelli.app.model.Condominio;
-import br.com.ragnelli.app.model.Morador;
+import br.com.ragnelli.app.model.Usuario;
 
 @ViewScoped
-@Named("formMoradorBean")
-public class CadastroMoradorBean implements Serializable {
+@Named("formUsuarioBean")
+public class CadastroUsuarioBean implements Serializable {
 
-	private Morador morador;
+	private Usuario usuario;
 	private String passwordCheck;
 
 	@EJB
-	CadastroMoradorEJB cadastro;
+	CadastroUsuarioEJB cadastro;
 
 	@Inject
 	ExternalContext externalContext;
@@ -41,15 +41,15 @@ public class CadastroMoradorBean implements Serializable {
 //		conversation.begin();
 	}
 
-	public Morador getMorador() {
-		if (morador == null) {
-			morador = new Morador();
+	public Usuario getUsuario() {
+		if (usuario == null) {
+			usuario = new Usuario();
 		}
-		return morador;
+		return usuario;
 	}
 
-	public void setMorador(Morador morador) {
-		this.morador = morador;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public String getPasswordCheck() {
@@ -69,7 +69,7 @@ public class CadastroMoradorBean implements Serializable {
 
 	public void carregarBlocos(AjaxBehaviorEvent event) {
 		Condominio condominio = (Condominio) event.getSource();
-		morador.setCondominio(condominio);
+		usuario.setCondominio(condominio);
 	}
 
 	public List<Condominio> condominioAutocomplete(String nomeCondominio) {
@@ -81,7 +81,7 @@ public class CadastroMoradorBean implements Serializable {
 
 		Pattern pattern = Pattern.compile("(?i:.*" + nomeBloco + "+.*)");
 
-		return morador.getCondominio().getBlocos().stream()
+		return usuario.getCondominio().getBlocos().stream()
 
 				.filter(b -> {
 					Matcher matcher = pattern.matcher(b.getNome());
@@ -93,11 +93,11 @@ public class CadastroMoradorBean implements Serializable {
 
 	public String gravar() {
 
-		cadastro.gravar(morador);
+		cadastro.gravar(usuario);
 		HttpSession session = (HttpSession) externalContext.getSession(false);
 		session.invalidate();
 
-		return "cadastrarMorador?faces-redirect=true";
+		return "cadastrarUsuario?faces-redirect=true";
 	}
 
 }
